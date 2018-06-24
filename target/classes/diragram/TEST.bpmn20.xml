@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="hcmApprow">
+  <process id="TEST" name="DEMO" isExecutable="true">
+    <startEvent id="sid-1R5jZOab-nI4j-4W1s-ADTv-vN0ckFTqDsjc" name="开始" activiti:initiator="initiator">
+      <extensionElements>
+        <activiti:formProperty id="borrowId" name="借阅id" type="long" required="true"/>
+      </extensionElements>
+    </startEvent>
+    <endEvent id="sid-lS6sUXEm-IYYB-4r3G-9eqG-U9PL3rrWQ1SL"/>
+    <userTask id="sid-VbApu3ng-j9gO-43sB-8tmm-mPKGU7vMRX86" name="userTask" activiti:formKey="contract_borrow/borroe_approval.html"
+              activiti:candidateGroups="group1" activiti:candidateUsers="${managerIds}" activiti:assignee="tom">
+      <extensionElements>
+        <activiti:formProperty id="APPROVAL_CANDIDATE_RULE" type="enum">
+          <activiti:value id="APPOINTED_EMPLOYEE" name="lucy"/>
+        </activiti:formProperty>
+        <activiti:formProperty id="APPROVAL_STRATEGY" name="ONE_APPROVAL" type="string"/>
+        <activiti:formProperty id="WFL_NUM" name="0" type="string"/>
+        <activiti:formProperty id="APPROVAL_ACTION" type="enum">
+          <activiti:value id="DELEGATE_FLAG" name="Y"/>
+        </activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <exclusiveGateway id="sid-BKXupIC8-CoN5-4fec-8LOY-9VLDWlfD3KvZ"/>
+    <sequenceFlow id="sid-daYpIKT9-iu7g-4d63-8nz2-euhifWOFyVpB" sourceRef="sid-1R5jZOab-nI4j-4W1s-ADTv-vN0ckFTqDsjc" targetRef="sid-VbApu3ng-j9gO-43sB-8tmm-mPKGU7vMRX86"/>
+    <userTask id="sid-VfVSZUKu-QtB3-4kAr-8vlT-TVyv9VP5GiDh" name="JLTASK" activiti:formKey="contract_borrow/borroe_approval.html">
+      <extensionElements>
+        <activiti:formProperty id="APPROVAL_STRATEGY" name="ONE_APPROVAL" type="string"/>
+        <activiti:formProperty id="APPROVAL_CANDIDATE_RULE" type="enum">
+          <activiti:value id="APPOINTED_EMPLOYEE" name="tom"/>
+        </activiti:formProperty>
+        <activiti:formProperty id="WFL_NUM" type="string"/>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-hF3g0JhB-0EB1-43l8-8PlI-Zusq5PhNu1Qi" sourceRef="sid-VfVSZUKu-QtB3-4kAr-8vlT-TVyv9VP5GiDh" targetRef="sid-BKXupIC8-CoN5-4fec-8LOY-9VLDWlfD3KvZ"/>
+    <sequenceFlow id="sid-q6FeOMTF-iya4-4g98-8xMm-lYh0dNhEfOMy" sourceRef="sid-VbApu3ng-j9gO-43sB-8tmm-mPKGU7vMRX86" targetRef="sid-VfVSZUKu-QtB3-4kAr-8vlT-TVyv9VP5GiDh"/>
+    <sequenceFlow id="sid-p5KnSlqO-lrtm-48D4-8qxg-gjgqy3S8MvQU" sourceRef="sid-BKXupIC8-CoN5-4fec-8LOY-9VLDWlfD3KvZ" targetRef="sid-lS6sUXEm-IYYB-4r3G-9eqG-U9PL3rrWQ1SL">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${approveResult=='APPROVED'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sid-p5KnSlqO-lrtm-48D4-8qxg-gjgqy3S8MvQU1" sourceRef="sid-BKXupIC8-CoN5-4fec-8LOY-9VLDWlfD3KvZ" targetRef="sid-VbApu3ng-j9gO-43sB-8tmm-mPKGU7vMRX86">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${approveResult=='REJECTED'}]]></conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_TEST">
+    <bpmndi:BPMNPlane bpmnElement="TEST" id="BPMNPlane_TEST">
+      <bpmndi:BPMNShape bpmnElement="sid-1R5jZOab-nI4j-4W1s-ADTv-vN0ckFTqDsjc" id="BPMNShape_sid-1R5jZOab-nI4j-4W1s-ADTv-vN0ckFTqDsjc">
+        <omgdc:Bounds height="30.0" width="30.0" x="45.0" y="205.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-lS6sUXEm-IYYB-4r3G-9eqG-U9PL3rrWQ1SL" id="BPMNShape_sid-lS6sUXEm-IYYB-4r3G-9eqG-U9PL3rrWQ1SL">
+        <omgdc:Bounds height="28.0" width="28.0" x="705.0" y="326.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-VbApu3ng-j9gO-43sB-8tmm-mPKGU7vMRX86" id="BPMNShape_sid-VbApu3ng-j9gO-43sB-8tmm-mPKGU7vMRX86">
+        <omgdc:Bounds height="80.0" width="100.0" x="135.0" y="180.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-BKXupIC8-CoN5-4fec-8LOY-9VLDWlfD3KvZ" id="BPMNShape_sid-BKXupIC8-CoN5-4fec-8LOY-9VLDWlfD3KvZ">
+        <omgdc:Bounds height="40.0" width="40.0" x="450.0" y="200.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-VfVSZUKu-QtB3-4kAr-8vlT-TVyv9VP5GiDh" id="BPMNShape_sid-VfVSZUKu-QtB3-4kAr-8vlT-TVyv9VP5GiDh">
+        <omgdc:Bounds height="80.0" width="100.0" x="300.0" y="180.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-hF3g0JhB-0EB1-43l8-8PlI-Zusq5PhNu1Qi" id="BPMNEdge_sid-hF3g0JhB-0EB1-43l8-8PlI-Zusq5PhNu1Qi">
+        <omgdi:waypoint x="400.0" y="220.20746887966806"/>
+        <omgdi:waypoint x="450.4166666666667" y="220.41666666666666"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-q6FeOMTF-iya4-4g98-8xMm-lYh0dNhEfOMy" id="BPMNEdge_sid-q6FeOMTF-iya4-4g98-8xMm-lYh0dNhEfOMy">
+        <omgdi:waypoint x="235.0" y="220.0"/>
+        <omgdi:waypoint x="300.0" y="220.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-daYpIKT9-iu7g-4d63-8nz2-euhifWOFyVpB" id="BPMNEdge_sid-daYpIKT9-iu7g-4d63-8nz2-euhifWOFyVpB">
+        <omgdi:waypoint x="75.0" y="220.0"/>
+        <omgdi:waypoint x="135.0" y="220.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-p5KnSlqO-lrtm-48D4-8qxg-gjgqy3S8MvQU1" id="BPMNEdge_sid-p5KnSlqO-lrtm-48D4-8qxg-gjgqy3S8MvQU1">
+        <omgdi:waypoint x="470.0" y="240.0"/>
+        <omgdi:waypoint x="470.0" y="340.0"/>
+        <omgdi:waypoint x="235.0" y="241.05263157894737"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-p5KnSlqO-lrtm-48D4-8qxg-gjgqy3S8MvQU" id="BPMNEdge_sid-p5KnSlqO-lrtm-48D4-8qxg-gjgqy3S8MvQU">
+        <omgdi:waypoint x="483.33016304347825" y="226.66983695652175"/>
+        <omgdi:waypoint x="706.3830380466728" y="333.93268831620685"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
